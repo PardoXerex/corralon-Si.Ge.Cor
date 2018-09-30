@@ -6,11 +6,9 @@ import SiGeCor.DAO.DAOException;
 import SiGeCor.DAO.clienteDAO;
 import java.sql.Array;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -170,14 +168,7 @@ public class MySQLCliente implements clienteDAO{
         }
         return cliente;
     }
-    public static void main(String[]args) throws SQLException{
-        Connection conexion;
-        try {
-            conexion=DriverManager.getConnection("jdbc:mysql://localhost:3306/corralonsigecor?user=root&password=pardo");
-        } catch (Exception e) {
-        }
-    }
-    
+        
     /*Esto es para probar 
  public static void main(String[]args) throws SQLException, DAOException{
     String driver = "com.mysql.jdbc.Driver";
