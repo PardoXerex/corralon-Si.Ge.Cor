@@ -86,7 +86,6 @@ public class MySQLCliente implements clienteDAO{
     @Override
     public void eliminar(cliente k) throws DAOException{
         PreparedStatement stat=null;
-        ResultSet rs=null;
         try {
             stat=conexion.prepareStatement(DELETE);
             stat.setLong(1, k.getDniCliente());
