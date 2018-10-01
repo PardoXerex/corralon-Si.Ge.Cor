@@ -15,7 +15,7 @@ import java.util.List;
 public class MySQLProducto implements productoDAO{
     private final Connection conexion;
     final String INSERT = "INSERT INTO producto(Nombre_Producto,Descripcion_Prod) VALUES (?,?)";
-    final String UPDATE = "UPDATE producto SET Nombre_Producto=?, Descripcion_Prod=? WHERE Cod_Material=?";
+    final String UPDATE = "UPDATE producto SET Nombre_Producto=?, Descripcion_Prod=? WHERE Cod_Producto=?";
     final String DELETE = "DELETE FROM producto WHERE Cod_Producto=?";
     final String GETALL = "SELECT Nombre_Producto,Descripcion_Prod FROM producto";
     final String GETONE = "SELECT Nombre_Producto,Descripcion_Prod FROM producto WHERE Cod_Producto=?";
