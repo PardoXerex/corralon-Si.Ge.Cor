@@ -39,8 +39,9 @@ public class catalogo{
         this.id = id;
     }
     
-    public catalogo(Long cuitProv,Long codProd,Date fecha){
+    public catalogo(Long cuitProv,Long codProd,float precioUnitario,Date fecha){
         this.id= new IdCatalogo(cuitProv, codProd);
+        this.precioUnitario=precioUnitario;
         this.fechaVigencia=fecha;
     }
 
