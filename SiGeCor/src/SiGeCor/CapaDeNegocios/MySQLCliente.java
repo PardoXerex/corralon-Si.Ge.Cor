@@ -167,7 +167,6 @@ public class MySQLCliente implements clienteDAO{
         }
         return cliente;
     }
-        
     /*Esto es para probar 
  public static void main(String[]args) throws SQLException, DAOException{
     String driver = "com.mysql.jdbc.Driver";
@@ -185,8 +184,6 @@ public class MySQLCliente implements clienteDAO{
     List<cliente> clientes=dao.obtenerTodos();
     for(cliente c :clientes){
         System.out.println(c.toString());
-     }     
- }*/    
- 
-    
+     }*/     
+
 }
