@@ -4,14 +4,16 @@ package SiGeCor.CapaDeNegocios;
 import SiGeCor.CapaDeDatos.producto;
 import SiGeCor.DAO.DAOException;
 import SiGeCor.DAO.productoDAO;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLProducto implements productoDAO{
-    private Connection conexion;
+    private final Connection conexion;
     final String INSERT = "INSERT INTO producto(Nombre_Producto,Descripcion_Prod) VALUES (?,?)";
     final String UPDATE = "UPDATE producto SET Nombre_Producto=?, Descripcion_Prod=? WHERE Cod_Material=?";
     final String DELETE = "DELETE FROM producto WHERE Cod_Producto=?";
@@ -117,13 +119,46 @@ public class MySQLProducto implements productoDAO{
     }
 
     @Override
-    public List<producto> obtenerTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<producto> obtenerTodos() throws DAOException{
+        PreparedStatement stat=null;
+        ResultSet rs=null;
+        List<producto> productos=new ArrayList<>();
+        try {
+            stat=conexion.prepareStatement(GETALL);
+            rs=stat.executeQuery();
+            while (rs.next()) {
+                productos.add(convertir(rs));
+            }
+        } catch (SQLException ex) {
+            throw new IllegalStateException("Error SQL",ex);
+        }finally {
+            cerrarResulSet(rs);
+            cerrarStatement(stat);
+        }
+        return productos;
     }
 
     @Override
-    public producto obtener(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public producto obtener(Long id) throws DAOException{
+        PreparedStatement stat=null;
+        ResultSet rs=null;
+        producto prod=null;
+        try {
+            stat=conexion.prepareStatement(GETONE);
+            stat.setLong(1,id);
+            rs=stat.executeQuery();
+            if (rs.next()) {
+                prod=convertir(rs);
+            } else {
+                throw new DAOException("No se ha encontrado ese registro");
+            }
+        } catch (SQLException ex) {
+            throw new DAOException("Error SQL",ex);
+        }finally {
+            cerrarResulSet(rs);
+            cerrarStatement(stat);
+        }
+        return prod;
     }
     
 }
